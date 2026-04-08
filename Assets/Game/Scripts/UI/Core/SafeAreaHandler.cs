@@ -17,9 +17,12 @@ namespace TripledotCase.UI.Core
     [DisallowMultipleComponent]
     public class SafeAreaHandler : MonoBehaviour
     {
+        [Tooltip("Uncheck to ignore the bottom inset (useful when the bottom bar is " +
+                 "intentionally designed to bleed to the screen edge).")]
+        [SerializeField] private bool _applyBottomInset = true;
         private RectTransform _rectTransform;
-        private Rect          _lastSafeArea;
-        private Vector2       _lastScreenSize;
+        private Rect _lastSafeArea;
+        private Vector2 _lastScreenSize;
 
         private void Awake()
         {
@@ -39,10 +42,10 @@ namespace TripledotCase.UI.Core
 
         private void ApplySafeArea()
         {
-            var safeArea  = Screen.safeArea;
+            var safeArea = Screen.safeArea;
             var screenSize = new Vector2(Screen.width, Screen.height);
 
-            _lastSafeArea   = safeArea;
+            _lastSafeArea = safeArea;
             _lastScreenSize = screenSize;
 
             // Guard against zero-size screen (can happen during startup on some devices)
@@ -54,6 +57,12 @@ namespace TripledotCase.UI.Core
                                         safeArea.yMin / screenSize.y);
             var anchorMax = new Vector2(safeArea.xMax / screenSize.x,
                                         safeArea.yMax / screenSize.y);
+
+            // Optionally ignore the bottom inset so the SafeAreaPanel extends
+            // to the true screen edge — useful when the bottom nav bar is designed
+            // to bleed to the bottom of the screen.
+            if (!_applyBottomInset)
+                anchorMin.y = 0f;
 
             _rectTransform.anchorMin = anchorMin;
             _rectTransform.anchorMax = anchorMax;
