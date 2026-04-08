@@ -1,5 +1,5 @@
 using TripledotCase.UI.Core;
-// using TripledotCase.UI.HomeScreen.BottomBar; 
+using TripledotCase.UI.HomeScreen.BottomBar;
 using UnityEngine;
 
 namespace TripledotCase.UI.HomeScreen
@@ -20,7 +20,7 @@ namespace TripledotCase.UI.HomeScreen
     {
         [Header("Child Views")]
         [SerializeField] private TopBarView _topBarView;
-        // [SerializeField] private BottomBarView  _bottomBarView; 
+        [SerializeField] private BottomBarView _bottomBarView;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────────
 
@@ -30,10 +30,10 @@ namespace TripledotCase.UI.HomeScreen
             InitializeDemoValues();
         }
 
-        // private void Start() 
-        // {
-        //     _bottomBarView.Appear();
-        // }
+        private void Start() 
+        {
+            _bottomBarView.Appear();
+        }
 
         private void OnDestroy()
         {

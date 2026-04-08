@@ -1550,7 +1550,7 @@ GameObject:
   - component: {fileID: 1693638534}
   - component: {fileID: 1693638533}
   m_Layer: 5
-  m_Name: HeartText
+  m_Name: HeartStatusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2157,8 +2157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.HomeScreen.TopBarView
   _coinsText: {fileID: 915439503}
   _coinsAddButton: {fileID: 901495645}
-  _heartsCountText: {fileID: 1693638533}
-  _heartsStatusText: {fileID: 1995426058}
+  _heartsCountText: {fileID: 1995426058}
+  _heartsStatusText: {fileID: 1693638533}
   _starsText: {fileID: 1186505245}
   _settingsButton: {fileID: 556714081}
 --- !u!1 &1995426056
@@ -2173,7 +2173,7 @@ GameObject:
   - component: {fileID: 1995426059}
   - component: {fileID: 1995426058}
   m_Layer: 5
-  m_Name: HeartStatusText
+  m_Name: HeartCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
