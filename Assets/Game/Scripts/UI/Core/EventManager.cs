@@ -39,6 +39,14 @@ namespace TripledotCase.UI.Core
         /// <summary>Fired when a popup initiates its closing sequence.</summary>
         public static event Action OnPopupClosed;
 
+        // ── Screens ───────────────────────────────────────────────────────────────
+
+        /// <summary>Fired to open the Level Completed screen.</summary>
+        public static event Action OnLevelCompletedTriggered;
+
+        /// <summary>Fired when the Level Completed screen finishes its close animation.</summary>
+        public static event Action OnLevelCompletedClosed;
+
         // ── Dispatchers ───────────────────────────────────────────────────────────
 
         /// <param name="buttonIndex">Zero-based index of the activated button.</param>
@@ -54,6 +62,12 @@ namespace TripledotCase.UI.Core
         public static void FirePopupClosed() =>
             OnPopupClosed?.Invoke();
 
+        public static void FireLevelCompletedTriggered() =>
+            OnLevelCompletedTriggered?.Invoke();
+
+        public static void FireLevelCompletedClosed() =>
+            OnLevelCompletedClosed?.Invoke();
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
 
         /// <summary>
@@ -66,6 +80,8 @@ namespace TripledotCase.UI.Core
             OnBarClosed        = null;
             OnSettingsClicked  = null;
             OnPopupClosed      = null;
+            OnLevelCompletedTriggered = null;
+            OnLevelCompletedClosed = null;
         }
     }
 }
