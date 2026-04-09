@@ -34,6 +34,11 @@ namespace TripledotCase.UI.Core
         /// <summary>Fired when the Settings gear button is tapped.</summary>
         public static event Action OnSettingsClicked;
 
+        // ── Popups ────────────────────────────────────────────────────────────────
+
+        /// <summary>Fired when a popup initiates its closing sequence.</summary>
+        public static event Action OnPopupClosed;
+
         // ── Dispatchers ───────────────────────────────────────────────────────────
 
         /// <param name="buttonIndex">Zero-based index of the activated button.</param>
@@ -46,6 +51,9 @@ namespace TripledotCase.UI.Core
         public static void FireSettingsClicked() =>
             OnSettingsClicked?.Invoke();
 
+        public static void FirePopupClosed() =>
+            OnPopupClosed?.Invoke();
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
 
         /// <summary>
@@ -57,6 +65,7 @@ namespace TripledotCase.UI.Core
             OnContentActivated = null;
             OnBarClosed        = null;
             OnSettingsClicked  = null;
+            OnPopupClosed      = null;
         }
     }
 }
