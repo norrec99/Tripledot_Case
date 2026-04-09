@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebe103351f3e4844b4cb94c1f41bd76, type: 3}
+  m_Name: TurkishLanguage
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LanguageData
+  LanguageID: TR
+  LanguageIcon: {fileID: 21300000, guid: 53795584b682acf4bb97481cd3b7fe63, type: 3}
+  Entries:
+  - Key: popup.settings.title
+    Value: Ayarlar
+  - Key: popup.settings.sound
+    Value: Ses
+  - Key: popup.settings.music
+    Value: Muzik
+  - Key: popup.settings.vibration
+    Value: Titresim
+  - Key: popup.settings.notification
+    Value: Bildirimler
+  - Key: popup.settings.language
+    Value: Dil
+  - Key: popup.settings.terms
+    Value: H&S
+  - Key: popup.settings.privacy
+    Value: Gizlilik
+  - Key: popup.settings.support
+    Value: Destek
+  - Key: topbar.heart.status
+    Value: Dolu
+  - Key: bottombar.nav.home
+    Value: Ev
+  - Key: bottombar.nav.shop
+    Value: Magaza
+  - Key: bottombar.nav.talent
+    Value: Yetenek

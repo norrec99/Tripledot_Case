@@ -21,17 +21,43 @@ namespace TripledotCase.UI.Core
             _textComponent = GetComponent<TextMeshProUGUI>();
         }
 
+        /// <summary>Allows external scripts to dynamically feed new localization keys.</summary>
+        public void SetKey(string newKey)
+        {
+            _localizationKey = newKey;
+            
+            // Only attempt to fetch if the game is actually running and manager exists
+            if (Application.isPlaying && LocalizationManager.Instance != null)
+            {
+                RefreshText();
+            }
+            else if (_textComponent != null)
+            {
+               _textComponent.text = $"[{_localizationKey}]"; // Editor placeholder
+            }
+        }
+
         private void Start()
         {
-            // Placeholder: In a real system, you'd register this text to a Localization Manager
-            // e.g., LocalizationManager.Register(this);
-            // And fetch the initial translation
-            
-            if (!string.IsNullOrEmpty(_localizationKey))
+            if (LocalizationManager.Instance != null)
             {
-                // Force an update to show it's active in dev
-                Debug.Log($"[LocalizedText] Fetching translation for key: {_localizationKey}");
+                // Subscribe so it updates dynamically if the user swaps language mid-game!
+                LocalizationManager.OnLanguageChanged += RefreshText;
+                
+                // Fetch the initial translation immediately on load
+                RefreshText(); 
             }
+        }
+
+        private void OnDestroy()
+        {
+            LocalizationManager.OnLanguageChanged -= RefreshText;
+        }
+
+        private void RefreshText()
+        {
+            if (string.IsNullOrEmpty(_localizationKey)) return;
+            UpdateTranslation(LocalizationManager.Instance.GetTranslation(_localizationKey));
         }
 
         /// <summary>

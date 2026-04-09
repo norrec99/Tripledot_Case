@@ -38,7 +38,8 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
         [Header("Identity")]
         [SerializeField] private int _buttonIndex;
-        [SerializeField] private string _buttonLabel = "Button";
+        [Tooltip("The localization key used for this button's label.")]
+        [SerializeField] private string _localizationKey = "bottombar.button";
         [SerializeField] private ButtonState _initialState = ButtonState.Idle;
 
         [Header("Animation")]
@@ -68,7 +69,12 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
         private void Awake()
         {
-            if (_label != null) _label.text = _buttonLabel;
+            if (_label != null)
+            {
+                var locText = _label.GetComponent<TripledotCase.UI.Core.LocalizedText>();
+                if (locText != null) locText.SetKey(_localizationKey);
+                else _label.text = _localizationKey; // Fallback placeholder
+            }
             _iconIdlePos = _iconRect.anchoredPosition;
 
             _navButton?.onClick.AddListener(HandleNavClick);

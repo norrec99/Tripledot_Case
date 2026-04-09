@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 8654998916017280517}
   - component: {fileID: 396601927458024941}
   - component: {fileID: 1622095028943127550}
+  - component: {fileID: 292862330484998263}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -257,6 +258,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &292862330484998263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206856048478056360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120e4800490ffb546b606c31a04ed24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LocalizedText
+  _localizationKey: bottombar.nav.home
 --- !u!1 &213230754404904017
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +330,7 @@ MonoBehaviour:
   _labelGroup: {fileID: 3085967130286402953}
   _label: {fileID: 3851237772826663334}
   _buttonIndex: 3
-  _buttonLabel: Talent
+  _localizationKey: bottombar.nav.talent
   _initialState: 0
   _iconMoveY: 54
   _iconActiveScale: 1.2
@@ -701,7 +715,7 @@ MonoBehaviour:
   _labelGroup: {fileID: 3656073192544565469}
   _label: {fileID: 3250804714565307634}
   _buttonIndex: 0
-  _buttonLabel: Button
+  _localizationKey: bottombar.button
   _initialState: 2
   _iconMoveY: 54
   _iconActiveScale: 1.2
@@ -962,7 +976,7 @@ MonoBehaviour:
   _labelGroup: {fileID: 658370301636376529}
   _label: {fileID: 1622095028943127550}
   _buttonIndex: 2
-  _buttonLabel: Home
+  _localizationKey: bottombar.nav.home
   _initialState: 1
   _iconMoveY: 54
   _iconActiveScale: 1.2
@@ -980,6 +994,7 @@ GameObject:
   - component: {fileID: 6623727582207183965}
   - component: {fileID: 2770151196637116341}
   - component: {fileID: 3851237772826663334}
+  - component: {fileID: 575726841086956476}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -1106,6 +1121,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &575726841086956476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390963861237773808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120e4800490ffb546b606c31a04ed24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LocalizedText
+  _localizationKey: bottombar.nav.talent
 --- !u!1 &2501303187165974497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,7 +1863,7 @@ MonoBehaviour:
   _labelGroup: {fileID: 7529409811451255785}
   _label: {fileID: 8636779061634559942}
   _buttonIndex: 4
-  _buttonLabel: Button
+  _localizationKey: bottombar.button
   _initialState: 2
   _iconMoveY: 54
   _iconActiveScale: 1.2
@@ -2160,6 +2188,7 @@ GameObject:
   - component: {fileID: 4409710424714956174}
   - component: {fileID: 4661164827534685798}
   - component: {fileID: 6029226133335316597}
+  - component: {fileID: 6687544717104409983}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -2286,6 +2315,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6687544717104409983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183693293821490211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120e4800490ffb546b606c31a04ed24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LocalizedText
+  _localizationKey: bottombar.nav.shop
 --- !u!1 &5318409940588127051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,7 +2888,7 @@ MonoBehaviour:
   _labelGroup: {fileID: 5480260217760574554}
   _label: {fileID: 6029226133335316597}
   _buttonIndex: 1
-  _buttonLabel: Shop
+  _localizationKey: bottombar.nav.shop
   _initialState: 0
   _iconMoveY: 54
   _iconActiveScale: 1.2

@@ -87,7 +87,6 @@ namespace TripledotCase.UI.HomeScreen
             _heartsCountText.text = hearts.ToString();
             _starsText.text = stars.ToString("N0");
 
-            _heartsStatusText.text = heartsFull ? "Full" : string.Empty;
             _heartsStatusText.gameObject.SetActive(heartsFull);
         }
 

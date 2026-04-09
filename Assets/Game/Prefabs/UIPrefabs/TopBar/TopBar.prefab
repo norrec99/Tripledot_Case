@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 6978796745092720864}
   - component: {fileID: 774822460270897211}
   - component: {fileID: 707516925422097239}
+  - component: {fileID: 6724919712379108775}
   m_Layer: 5
   m_Name: CoinAddButton
   m_TagString: Untagged
@@ -196,6 +197,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6724919712379108775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486057340757749319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045d7e296cb796740b6e001faac57f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.AnimatedButton
+  _pressScaleMultiplier: 0.9
+  _animationDuration: 0.1
+  _easeType: 6
 --- !u!1 &2027717545747534987
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +223,7 @@ GameObject:
   - component: {fileID: 3221638355044865962}
   - component: {fileID: 5776731418408860572}
   - component: {fileID: 6725117429578183404}
+  - component: {fileID: 2119453597117815725}
   m_Layer: 5
   m_Name: HeartStatusText
   m_TagString: Untagged
@@ -333,6 +350,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2119453597117815725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027717545747534987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120e4800490ffb546b606c31a04ed24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LocalizedText
+  _localizationKey: topbar.heart.status
 --- !u!1 &2277766298349523009
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +788,7 @@ GameObject:
   - component: {fileID: 2401222437541547396}
   - component: {fileID: 4797108468637447576}
   - component: {fileID: 6420656675996190512}
+  - component: {fileID: 8033160936884690106}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -867,6 +898,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8033160936884690106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133014499704995190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045d7e296cb796740b6e001faac57f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.AnimatedButton
+  _pressScaleMultiplier: 0.9
+  _animationDuration: 0.1
+  _easeType: 6
 --- !u!1 &4484962667293760354
 GameObject:
   m_ObjectHideFlags: 0
