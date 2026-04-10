@@ -41,3 +41,5 @@ MonoBehaviour:
     Value: Magaza
   - Key: bottombar.nav.talent
     Value: Yetenek
+  - Key: level.complete
+    Value: Bolum Sonu

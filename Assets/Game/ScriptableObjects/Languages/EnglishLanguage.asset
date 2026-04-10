@@ -41,3 +41,5 @@ MonoBehaviour:
     Value: Shop
   - Key: bottombar.nav.talent
     Value: Talent
+  - Key: level.complete
+    Value: Level Complete

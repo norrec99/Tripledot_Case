@@ -18,13 +18,14 @@ namespace TripledotCase.UI.Screens
 
         [Header("Animated Elements")]
         [SerializeField] private RectTransform _titleText;
+        [Tooltip("Attach a CanvasGroup to your Title Text so we can cleanly fade it!")]
+        [SerializeField] private CanvasGroup _titleGroup;
         [SerializeField] private Transform _bigStar;
         [SerializeField] private CanvasGroup _lightRaysGroup;
 
         [Header("Tick-Up Counters")]
-        [SerializeField] private TextMeshProUGUI _scoreText;
-        [SerializeField] private TextMeshProUGUI _coinsText;
-        [SerializeField] private TextMeshProUGUI _crownsText;
+        [Tooltip("Drop your RewardView prefabs spanning across the screen here!")]
+        [SerializeField] private System.Collections.Generic.List<RewardView> _rewards;
 
         [Header("Secret Sauce (VFX)")]
         [SerializeField] private UIParticleBurst _starBurstVFX;
@@ -34,11 +35,6 @@ namespace TripledotCase.UI.Screens
 
         private Sequence _entrySequence;
         private Vector2 _titleTargetPos;
-
-        // Hardcoding targets for the demo layout as requested
-        private int _targetScore = 250;
-        private int _targetCoins = 100;
-        private int _targetCrowns = 8;
 
         private void Awake()
         {
@@ -72,39 +68,67 @@ namespace TripledotCase.UI.Screens
 
             // 1. Reset all elements back to an invisible "waiting" state
             _mainCanvasGroup.alpha = 0f;
-            _titleText.anchoredPosition = _titleTargetPos + new Vector2(0, 500f); // 500px above screen
+            _mainCanvasGroup.blocksRaycasts = true; // Enable clicking
+            
+            if (_titleGroup != null) _titleGroup.alpha = 0f;
+            _titleText.anchoredPosition = _titleTargetPos - new Vector2(0, 150f); // 150px BELOW the target
+            
             _bigStar.localScale = Vector3.zero;
             _lightRaysGroup.alpha = 0f;
-            _scoreText.text = "0";
-            _coinsText.text = "0";
-            _crownsText.text = "0";
+
+            if (_rewards != null)
+            {
+                foreach (var reward in _rewards) reward.PrepareForEntry();
+            }
 
             // 2. Build the master timeline
             _entrySequence = DOTween.Sequence()
                 // First, calmly fade the dark blue background in
-                .Append(_mainCanvasGroup.DOFade(1f, 0.4f))
+                .Append(_mainCanvasGroup.DOFade(1f, 0.4f));
 
-                // CRASH the title down from the top with an extreme elastic rubber-band effect
-                .Append(_titleText.DOAnchorPos(_titleTargetPos, 0.8f).SetEase(Ease.OutElastic))
+            // Smooth float & fade title up from below
+            _entrySequence.Append(_titleText.DOAnchorPos(_titleTargetPos, 0.8f).SetEase(Ease.OutCubic));
+            if (_titleGroup != null) 
+                _entrySequence.Insert(0.4f, _titleGroup.DOFade(1f, 0.7f)); // Starts right after background fade
 
+            _entrySequence
                 // SNAP the big star into existence using an overshoot curve
-                .Insert(0.5f, _bigStar.DOScale(1f, 0.6f).SetEase(Ease.OutBack, 1.5f))
+                .Insert(0.6f, _bigStar.DOScale(1f, 0.6f).SetEase(Ease.OutBack, 1.5f))
 
                 // EXACTLY as the star reaches max size, fire the 2D star explosion VFX
                 .InsertCallback(0.7f, () => { if (_starBurstVFX != null) _starBurstVFX.FireBurst(); })
 
                 // Slowly fade in the infinitely-spinning light rays sitting behind the star
-                .Insert(0.6f, _lightRaysGroup.DOFade(1f, 1f))
+                .Insert(0.6f, _lightRaysGroup.DOFade(1f, 1f));
 
-                // Tick the reward numbers up violently to make them feel heavy and earned
-                .Insert(0.7f, DOVirtual.Int(0, _targetScore, 1.2f, v => _scoreText.text = v.ToString("N0")).SetEase(Ease.OutExpo))
-                .Insert(0.9f, DOVirtual.Int(0, _targetCoins, 1.0f, v => _coinsText.text = v.ToString("N0")).SetEase(Ease.OutExpo))
-                .Insert(1.1f, DOVirtual.Int(0, _targetCrowns, 0.8f, v => _crownsText.text = v.ToString("N0")).SetEase(Ease.OutExpo));
+            // Drop the rewards from the sky one by one exactly after the Big Star finishes its intro!
+            // The big star pops from 0.6s and lasts 0.6s (finishing at 1.2s total on the timeline).
+            if (_rewards != null)
+            {
+                float dropDelay = 1.2f;
+                foreach (var reward in _rewards)
+                {
+                    RewardView localReward = reward;
+                    
+                    // Insert the chained sequence (Drop -> Count Up) perfectly into the master timeline
+                    if (localReward != null) 
+                        _entrySequence.Insert(dropDelay, localReward.PlayEntryAndCount(0.6f, 0.8f));
+                        
+                    // Stagger the next reward's drop by 0.2s
+                    dropDelay += 0.2f;
+                }
+            }
         }
 
-        private void Hide()
+        // Made public so it can be manually wired up via the Unity OnClick() block in the Inspector if needed!
+        public void Hide()
         {
+            Debug.Log("[LevelCompleted] Hide() triggered!");
             _entrySequence?.Kill();
+
+            // Prevent spam clicking while fading out
+            if (_mainCanvasGroup != null)
+                _mainCanvasGroup.blocksRaycasts = false;
 
             // Standard dissolve out
             _mainCanvasGroup.DOFade(0f, 0.3f).SetEase(Ease.InQuad).OnComplete(() =>
