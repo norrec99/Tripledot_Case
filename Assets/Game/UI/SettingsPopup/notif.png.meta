@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e5cde3b2debfeec4da1c4ea73e72f79e
+guid: f29cc7cce33371e4f8e0dec93dc5c88c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 981720869788495494
-    second: icn_notif_0
+      213: 7398716315335017233
+    second: notif_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icn_notif_0
+      name: notif_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 18
         y: 0
-        width: 183
-        height: 216
+        width: 220
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68ea4500ee5cf9d00800000000000000
-      internalID: 981720869788495494
+      spriteID: 1134e69e9458da660800000000000000
+      internalID: 7398716315335017233
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icn_notif_0: 981720869788495494
+      notif_0: 7398716315335017233
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

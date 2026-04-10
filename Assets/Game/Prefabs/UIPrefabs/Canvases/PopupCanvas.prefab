@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Popup.PopupManager
   _dimmedBackground: {fileID: 6606031365426301696}
   _maxDimAlpha: 0.95
-  _backgroundFadeDuration: 0.4
+  _backgroundFadeDuration: 0.2
   _popupContainer: {fileID: 780393220474885102}
   _settingsPopupPrefab: {fileID: 2492320694011950238, guid: 4d982b39c7930bd49bbe4677d437dd55, type: 3}
 --- !u!1 &8912716913755089888

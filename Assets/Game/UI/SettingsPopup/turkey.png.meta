@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 5c642f303f8a4dd4cbddf39aaa90b86f
+guid: 7b14415fa1807d94399ee192f9da72c7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1147803270886873895
-    second: phone-icon-256x256_0
-  - first:
-      213: 3455746946834188686
-    second: phone-icon-256x256_1
-  - first:
-      213: 723210998716460538
-    second: phone-icon-256x256_2
+      213: -5382658046807761749
+    second: turkey_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: phone-icon-256x256_0
+      name: turkey_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 58
-        width: 56
-        height: 153
+        y: 42
+        width: 256
+        height: 173
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,52 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d4a1c6a10f2210f0800000000000000
-      internalID: -1147803270886873895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: phone-icon-256x256_1
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 0
-        width: 132
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e8941bfe98745ff20800000000000000
-      internalID: 3455746946834188686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: phone-icon-256x256_2
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 58
-        width: 56
-        height: 153
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: afd6624529c590a00800000000000000
-      internalID: 723210998716460538
+      spriteID: bac10a46605fc45b0800000000000000
+      internalID: -5382658046807761749
       vertices: []
       indices: 
       edges: []
@@ -211,9 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      phone-icon-256x256_0: -1147803270886873895
-      phone-icon-256x256_1: 3455746946834188686
-      phone-icon-256x256_2: 723210998716460538
+      turkey_0: -5382658046807761749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

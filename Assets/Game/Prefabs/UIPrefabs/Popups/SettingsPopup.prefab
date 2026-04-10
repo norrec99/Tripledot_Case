@@ -229,12 +229,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 120
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 120
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -843,12 +843,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 24
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 100
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b780fbf0905904885de807ed9cb20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Popup.SettingsPopup
-  _animationDuration: 0.35
+  _animationDuration: 0.2
   _popupPanel: {fileID: 8360549834350765325}
   _soundRow: {fileID: 840871638756243473}
   _musicRow: {fileID: 8344373002410162212}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 30
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1556,7 +1556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1606,6 +1606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5998870599755804707, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4331099709da2dd4c957d1c12a8293d1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1681,7 +1685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1734,7 +1738,7 @@ PrefabInstance:
     - target: {fileID: 5998870599755804707, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5c642f303f8a4dd4cbddf39aaa90b86f, type: 3}
+      objectReference: {fileID: 21300000, guid: ff8e49315db75e54e9579362396ff180, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1818,7 +1822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1871,7 +1875,7 @@ PrefabInstance:
     - target: {fileID: 5998870599755804707, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 77cbe254c9a0ca74581bf81c9ae3461a, type: 3}
+      objectReference: {fileID: 21300000, guid: e6fe082df3ffce0478cbe9384e8e15a7, type: 3}
     - target: {fileID: 7007320351428630877, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1947,7 +1951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2000,7 +2004,7 @@ PrefabInstance:
     - target: {fileID: 5998870599755804707, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9a4aac29d6e73694aa6d95e96c2d18d8, type: 3}
+      objectReference: {fileID: 21300000, guid: b2066b58fe269c445999546a86d61e65, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2072,7 +2076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5909934065504871100, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2125,7 +2129,7 @@ PrefabInstance:
     - target: {fileID: 5998870599755804707, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1e0a360110264c14183dce8e55a37332, type: 3}
+      objectReference: {fileID: 21300000, guid: f29cc7cce33371e4f8e0dec93dc5c88c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

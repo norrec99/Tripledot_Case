@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 77cbe254c9a0ca74581bf81c9ae3461a
+guid: 4202c8e66a977de49b542bcc9967dd03
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1394935068738616259
-    second: flag-icon-256x256_0
+      213: -5682863373648035079
+    second: coin_512_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: flag-icon-256x256_0
+      name: coin_512_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 24
         y: 0
-        width: 256
-        height: 256
+        width: 464
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cb76e8ed0ecb5310800000000000000
-      internalID: 1394935068738616259
+      spriteID: 9f281aaeed96221b0800000000000000
+      internalID: -5682863373648035079
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      flag-icon-256x256_0: 1394935068738616259
+      coin_512_0: -5682863373648035079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 53795584b682acf4bb97481cd3b7fe63
+guid: b2066b58fe269c445999546a86d61e65
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6590937950669788336
-    second: turkish-flag-256x256_0
+      213: 5044122071167073304
+    second: music_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turkish-flag-256x256_0
+      name: music_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 29
         y: 0
-        width: 256
+        width: 198
         height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b450565527b77b50800000000000000
-      internalID: 6590937950669788336
+      spriteID: 81cfe9f7c42500640800000000000000
+      internalID: 5044122071167073304
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      turkish-flag-256x256_0: 6590937950669788336
+      music_0: 5044122071167073304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

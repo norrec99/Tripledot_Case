@@ -14,10 +14,10 @@ namespace TripledotCase.UI.Popup
     {
         [Header("Base Animation")]
         [SerializeField] protected float _animationDuration = 0.35f;
-        
+
         [Tooltip("The central box that actually bounces in (not the dark background area).")]
         [SerializeField] protected Transform _popupPanel;
-        
+
         private CanvasGroup _canvasGroup;
         private Sequence _animSequence;
 
@@ -29,13 +29,13 @@ namespace TripledotCase.UI.Popup
         public virtual void Show(Action onShown = null)
         {
             _animSequence?.Kill();
-            
+
             gameObject.SetActive(true);
             _canvasGroup.alpha = 0f;
-            _popupPanel.localScale = Vector3.zero;
+            _popupPanel.localScale = Vector3.one * 0.9f;
 
             _animSequence = DOTween.Sequence()
-                .Join(_canvasGroup.DOFade(1f, _animationDuration * 0.5f))
+                .Join(_canvasGroup.DOFade(1f, _animationDuration))
                 .Join(_popupPanel.DOScale(1f, _animationDuration).SetEase(Ease.OutBack))
                 .OnComplete(() => onShown?.Invoke());
         }
@@ -45,7 +45,7 @@ namespace TripledotCase.UI.Popup
             _animSequence?.Kill();
 
             _animSequence = DOTween.Sequence()
-                .Join(_canvasGroup.DOFade(0f, _animationDuration * 0.5f))
+                .Join(_canvasGroup.DOFade(0f, _animationDuration))
                 .Join(_popupPanel.DOScale(0.8f, _animationDuration).SetEase(Ease.InBack)) // Shrink slightly to look good
                 .OnComplete(() =>
                 {
@@ -63,7 +63,7 @@ namespace TripledotCase.UI.Popup
             EventManager.FirePopupClosed();
             Hide();
         }
-        
+
         protected virtual void OnDestroy()
         {
             _animSequence?.Kill();

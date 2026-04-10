@@ -14,7 +14,7 @@ namespace TripledotCase.UI.Popup
         [Header("Visual Interpolation")]
         [Tooltip("The fullscreen black canvas heavily faded to darken the game behind the popup.")]
         [SerializeField] private CanvasGroup _dimmedBackground;
-        [Range(0f, 1f)] [SerializeField] private float _maxDimAlpha = 0.6f;
+        [Range(0f, 1f)][SerializeField] private float _maxDimAlpha = 0.6f;
         [SerializeField] private float _backgroundFadeDuration = 0.4f;
 
         [Header("Popup Spawning")]
@@ -31,7 +31,7 @@ namespace TripledotCase.UI.Popup
         {
             // Subscribe to cross-system signals to stay perfectly decoupled
             EventManager.OnSettingsClicked += HandleSettingsClicked;
-            EventManager.OnPopupClosed     += HandlePopupClosed;
+            EventManager.OnPopupClosed += HandlePopupClosed;
 
             // Ensure background is fully hidden on boot
             _dimmedBackground.gameObject.SetActive(false);
@@ -41,7 +41,7 @@ namespace TripledotCase.UI.Popup
         private void OnDestroy()
         {
             EventManager.OnSettingsClicked -= HandleSettingsClicked;
-            EventManager.OnPopupClosed     -= HandlePopupClosed;
+            EventManager.OnPopupClosed -= HandlePopupClosed;
         }
 
         // ── Signal Handlers ────────────────────────────────────────────────────────

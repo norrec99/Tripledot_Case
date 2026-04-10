@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: b3d0bb3e0c2f63542a8e0dbf14205ccc
+guid: ff8e49315db75e54e9579362396ff180
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8553642888022127471
-    second: speaker-icon-256x256_0
+      213: -6925040540963319615
+    second: vibration_0
   - first:
-      213: -5033067508313619382
-    second: speaker-icon-256x256_1
+      213: -7536389468026232266
+    second: vibration_1
+  - first:
+      213: 9158692265645642194
+    second: vibration_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: speaker-icon-256x256_0
+      name: vibration_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 129
-        height: 256
+        y: 72
+        width: 56
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 19c05ebcc1b5b4980800000000000000
-      internalID: -8553642888022127471
+      spriteID: 1c0d3b4815055ef90800000000000000
+      internalID: -6925040540963319615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: speaker-icon-256x256_1
+      name: vibration_1
       rect:
         serializedVersion: 2
-        x: 145
-        y: 0
-        width: 111
-        height: 254
+        x: 62
+        y: 24
+        width: 132
+        height: 208
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +169,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a44086c74c3f62ab0800000000000000
-      internalID: -5033067508313619382
+      spriteID: 6322d4555bd596790800000000000000
+      internalID: -7536389468026232266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vibration_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 72
+        width: 56
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d11dec37163a1f70800000000000000
+      internalID: 9158692265645642194
       vertices: []
       indices: 
       edges: []
@@ -186,8 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      speaker-icon-256x256_0: -8553642888022127471
-      speaker-icon-256x256_1: -5033067508313619382
+      vibration_0: -6925040540963319615
+      vibration_1: -7536389468026232266
+      vibration_2: 9158692265645642194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

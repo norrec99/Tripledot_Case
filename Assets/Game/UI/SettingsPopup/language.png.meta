@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1e0a360110264c14183dce8e55a37332
+guid: e6fe082df3ffce0478cbe9384e8e15a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3539095732346948062
-    second: bell-icon-256x256_0
+      213: 1869897672889653418
+    second: language_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bell-icon-256x256_0
+      name: language_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 40
         width: 256
-        height: 256
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 226fb5fae2b92eec0800000000000000
-      internalID: -3539095732346948062
+      spriteID: aa8daeeb60633f910800000000000000
+      internalID: 1869897672889653418
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bell-icon-256x256_0: -3539095732346948062
+      language_0: 1869897672889653418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
