@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TurkishLanguage
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LanguageData
   LanguageID: TR
-  LanguageIcon: {fileID: 21300000, guid: 53795584b682acf4bb97481cd3b7fe63, type: 3}
+  LanguageIcon: {fileID: 21300000, guid: 7b14415fa1807d94399ee192f9da72c7, type: 3}
   Entries:
   - Key: popup.settings.title
     Value: Ayarlar

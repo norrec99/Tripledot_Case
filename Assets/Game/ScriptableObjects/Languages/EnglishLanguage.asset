@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnglishLanguage
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Core.LanguageData
   LanguageID: EN
-  LanguageIcon: {fileID: 21300000, guid: 77cbe254c9a0ca74581bf81c9ae3461a, type: 3}
+  LanguageIcon: {fileID: 21300000, guid: e6fe082df3ffce0478cbe9384e8e15a7, type: 3}
   Entries:
   - Key: popup.settings.title
     Value: Settings
