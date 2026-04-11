@@ -43,6 +43,8 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         [SerializeField] private ButtonState _initialState = ButtonState.Idle;
 
         [Header("Animation")]
+        [Tooltip("The Target width the button inflates to when active (Original width is saved on awake).")]
+        [SerializeField] private float _activeWidth = 300f;
         [SerializeField] private float _iconMoveY = 54f;
         [SerializeField] private float _iconActiveScale = 1.2f;
         [SerializeField] private float _activateDuration = 0.30f;
@@ -54,6 +56,9 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         private ButtonState _currentState;
         private Sequence _sequence;
         private Vector2 _iconIdlePos;
+        private float _idleWidth;
+        private RectTransform _rectTransform;
+        private LayoutElement _layoutElement;
 
         // ── Public API ─────────────────────────────────────────────────────────────
 
@@ -61,6 +66,8 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         public int ButtonIndex => _buttonIndex;
         public bool IsLocked => _currentState == ButtonState.Locked;
         public bool IsActive => _currentState == ButtonState.Active;
+        public float ActiveWidth => _activeWidth;
+        public float NativeWidth => _idleWidth;
 
         public System.Action<BottomBarButtonView> OnButtonClicked;
         public System.Action<BottomBarButtonView> OnLockedButtonClicked;
@@ -77,6 +84,14 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
             }
             _iconIdlePos = _iconRect.anchoredPosition;
 
+            _rectTransform = GetComponent<RectTransform>();
+            _layoutElement = GetComponent<LayoutElement>();
+            
+            // Save our native width from the scene so we can safely return to it!
+            _idleWidth = _layoutElement != null && _layoutElement.preferredWidth > 0 
+                ? _layoutElement.preferredWidth 
+                : _rectTransform.sizeDelta.x;
+
             _navButton?.onClick.AddListener(HandleNavClick);
             _lockedButton?.onClick.AddListener(HandleLockedClick);
 
@@ -91,6 +106,21 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         }
 
         // ── Public Animation API ───────────────────────────────────────────────────
+
+        private Tween _widthTween;
+
+        public void AnimateWidthTo(float targetWidth, float overrideDuration = -1f)
+        {
+            _widthTween?.Kill();
+            
+            float duration = overrideDuration >= 0 ? overrideDuration : _activateDuration;
+
+            // Animate native struct properties dynamically so siblings are pushed gracefully
+            if (_layoutElement != null)
+                _widthTween = DOTween.To(() => _layoutElement.preferredWidth, x => _layoutElement.preferredWidth = x, targetWidth, duration).SetEase(Ease.OutCubic);
+            else if (_rectTransform != null)
+                _widthTween = _rectTransform.DOSizeDelta(new Vector2(targetWidth, _rectTransform.sizeDelta.y), duration).SetEase(Ease.OutCubic);
+        }
 
         public void Activate()
         {

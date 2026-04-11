@@ -309,7 +309,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 216, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2196543193759047735
 MonoBehaviour:
@@ -332,6 +332,7 @@ MonoBehaviour:
   _buttonIndex: 3
   _localizationKey: bottombar.nav.talent
   _initialState: 0
+  _activeWidth: 300
   _iconMoveY: 54
   _iconActiveScale: 1.2
   _activateDuration: 0.3
@@ -694,7 +695,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 216, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &438192311981946211
 MonoBehaviour:
@@ -717,6 +718,7 @@ MonoBehaviour:
   _buttonIndex: 0
   _localizationKey: bottombar.button
   _initialState: 2
+  _activeWidth: 300
   _iconMoveY: 54
   _iconActiveScale: 1.2
   _activateDuration: 0.3
@@ -955,7 +957,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 216, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4434707431598865007
 MonoBehaviour:
@@ -978,6 +980,7 @@ MonoBehaviour:
   _buttonIndex: 2
   _localizationKey: bottombar.nav.home
   _initialState: 1
+  _activeWidth: 300
   _iconMoveY: 54
   _iconActiveScale: 1.2
   _activateDuration: 0.3
@@ -1842,7 +1845,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 216, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6689508939478554199
 MonoBehaviour:
@@ -1865,6 +1868,7 @@ MonoBehaviour:
   _buttonIndex: 4
   _localizationKey: bottombar.button
   _initialState: 2
+  _activeWidth: 300
   _iconMoveY: 54
   _iconActiveScale: 1.2
   _activateDuration: 0.3
@@ -2120,6 +2124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4025048665635386081}
   - component: {fileID: 5818953512451300922}
+  - component: {fileID: 5295549750635607191}
   m_Layer: 5
   m_Name: ButtonsContainer
   m_TagString: Untagged
@@ -2149,7 +2154,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 240}
+  m_SizeDelta: {x: 0, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5818953512451300922
 MonoBehaviour:
@@ -2172,11 +2177,25 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5295549750635607191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173105443089305773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &5183693293821490211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,7 +2886,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 216, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8693624058687594980
 MonoBehaviour:
@@ -2890,6 +2909,7 @@ MonoBehaviour:
   _buttonIndex: 1
   _localizationKey: bottombar.nav.shop
   _initialState: 0
+  _activeWidth: 300
   _iconMoveY: 54
   _iconActiveScale: 1.2
   _activateDuration: 0.3

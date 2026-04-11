@@ -72,15 +72,22 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         // Start() is guaranteed to run after ALL Awake() calls — safe to read initial button states
         private void Start()
         {
+            // First, identify who the active button is
             foreach (var btn in _buttons)
             {
                 if (btn.IsActive)
                 {
                     _activeButton = btn;
-                    SnapIndicatorTo(btn);
                     break;
                 }
             }
+            
+            // Instantly apply structural sizes (300/195) so the Layout engine has exactly what it needs
+            DistributeWidths(snapImmediate: true);
+
+            // Finally, place the indicator squarely underneath the natively finalized layout coordinate
+            if (_activeButton != null)
+                SnapIndicatorTo(_activeButton);
         }
 
         private void OnDestroy()
@@ -131,11 +138,12 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         private void HandleButtonClicked(BottomBarButtonView clicked)
         {
             // Already active — toggle it OFF!
-            if (clicked.IsActive) 
+            if (clicked.IsActive)
             {
                 clicked.Deactivate();
                 _activeButton = null;
                 HideIndicator();
+                DistributeWidths(); // Revert to uncompressed idle state natively
                 return;
             }
 
@@ -144,6 +152,7 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
             _activeButton = clicked;
             clicked.Activate();
             SlideIndicatorTo(clicked);
+            DistributeWidths(); // Re-distribute compression based on newly activated target
             EventManager.FireContentActivated(clicked.ButtonIndex);
         }
 
@@ -152,8 +161,40 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
             clicked.PlayLockedFeedback();
         }
 
-        // ── Private: Indicator Animation ──────────────────────────────────────────
-        
+        // ── Private: Indicator & Width Animation ──────────────────────────────────
+
+        /// <summary>
+        /// Mathematically computes proportional space-stealing so that when one button Inflates by X,
+        /// all adjacent siblings collectively deflate by (-X) to ensure the total parent wrapper width never shifts!
+        /// </summary>
+        private void DistributeWidths(bool snapImmediate = false)
+        {
+            if (_buttons == null || _buttons.Count == 0) return;
+
+            float compressionPerInactive = 0f;
+
+            // If a button is active, compute exactly how much space it's stealing from the layout
+            if (_activeButton != null && _buttons.Count > 1)
+            {
+                float extraWidth = _activeButton.ActiveWidth - _activeButton.NativeWidth;
+                compressionPerInactive = extraWidth / (_buttons.Count - 1);
+            }
+
+            foreach (var btn in _buttons)
+            {
+                float targetWidth = btn.NativeWidth;
+
+                if (_activeButton != null)
+                {
+                    if (btn == _activeButton) targetWidth = btn.ActiveWidth;
+                    else targetWidth = btn.NativeWidth - compressionPerInactive;
+                }
+
+                // Command the button to smoothly ease into its new compressed/inflated bounds!
+                btn.AnimateWidthTo(targetWidth, snapImmediate ? 0f : -1f);
+            }
+        }
+
         /// <summary>Shrinks and hides the indicator entirely (used when a button is toggled off).</summary>
         private void HideIndicator()
         {
@@ -168,18 +209,36 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         {
             _indicatorSequence?.Kill();
 
-            // Force layout groups to calculate their sizes so we can read the correct width
             Canvas.ForceUpdateCanvases();
-            var targetRect = target.GetComponent<RectTransform>();
 
-            // Apply dynamic width, but keep the custom Designer height (e.g. 270)
-            _activeIndicator.sizeDelta = new Vector2(targetRect.rect.width, _indicatorHeight);
+            // Apply dynamic width (Target's massively inflated width), but keep the custom Designer height (e.g. 270)
+            _activeIndicator.sizeDelta = new Vector2(target.ActiveWidth, _indicatorHeight);
 
             // Snap only the X axis to match the button; leave Y exactly where it was in the Inspector
             _activeIndicator.position = new Vector3(target.transform.position.x, _activeIndicator.position.y, _activeIndicator.position.z);
 
             _activeIndicator.localScale = Vector3.one;
             _activeIndicator.gameObject.SetActive(true);
+        }
+
+        /// <summary>Pops the indicator up from scale 0 while mathematically tracking the layout shift beneath it.</summary>
+        private void PopInIndicatorOn(BottomBarButtonView target)
+        {
+            _indicatorSequence?.Kill();
+
+            _activeIndicator.sizeDelta = new Vector2(target.ActiveWidth, _indicatorHeight);
+            _activeIndicator.localScale = Vector3.zero;
+            _activeIndicator.gameObject.SetActive(true);
+
+            _indicatorSequence = DOTween.Sequence()
+                // Pop the scale up to 1.0!
+                .Join(_activeIndicator.DOScale(1f, _popInDuration).SetEase(Ease.OutBack))
+                // Heat-seek the target while the unity layout grows natively beneath us in the exact same timeframe!
+                .Join(DOVirtual.Float(0f, 1f, _popInDuration, v =>
+                {
+                    if (target != null)
+                        _activeIndicator.position = new Vector3(target.transform.position.x, _activeIndicator.position.y, _activeIndicator.position.z);
+                }));
         }
 
         /// <summary>Slides the indicator to the target button's position.
@@ -190,17 +249,25 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
             if (!_activeIndicator.gameObject.activeSelf)
             {
-                // Not yet visible — snap and pop rather than slide from off-screen
-                SnapIndicatorTo(target);
+                // Not yet visible — track and pop rather than rigidly evaluating from off-screen
+                PopInIndicatorOn(target);
                 return;
             }
 
-            var targetRect = target.GetComponent<RectTransform>();
+            // Capture our starting position for the slide interpolation
+            Vector3 startPos = _activeIndicator.position;
 
             _indicatorSequence = DOTween.Sequence()
-                .Join(_activeIndicator.DOMoveX(target.transform.position.x, _slideDuration)
-                                      .SetEase(_slideEase))
-                .Join(_activeIndicator.DOSizeDelta(new Vector2(targetRect.rect.width, _indicatorHeight), _slideDuration)
+                // Heat-seeking logic: Instead of a static DOMove, we interpolate to the target's CURRENT position every single frame.
+                .Join(DOVirtual.Float(0f, 1f, _slideDuration, v =>
+                {
+                    if (target != null)
+                    {
+                        float dynamicX = Mathf.LerpUnclamped(startPos.x, target.transform.position.x, v);
+                        _activeIndicator.position = new Vector3(dynamicX, _activeIndicator.position.y, _activeIndicator.position.z);
+                    }
+                }).SetEase(_slideEase))
+                .Join(_activeIndicator.DOSizeDelta(new Vector2(target.ActiveWidth, _indicatorHeight), _slideDuration)
                                       .SetEase(_slideEase))
                 .Join(_activeIndicator.DOScale(1f, _slideDuration) // Failsafe recovery if interrupted while hiding!
                                       .SetEase(_slideEase));
