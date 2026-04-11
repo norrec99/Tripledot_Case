@@ -1214,7 +1214,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 20
+  m_Spacing: 25
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1771,6 +1771,10 @@ PrefabInstance:
     - target: {fileID: 99028186418477980, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: m_text
       value: '[popup.settings.language]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 943680204269452053, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1044755886916434726, guid: a0d445dfe0a3b1a4eb41a23aa6ead6a3, type: 3}
       propertyPath: _data
