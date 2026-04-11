@@ -33,10 +33,10 @@ namespace TripledotCase.UI.Popup
                 _closeButton.onClick.AddListener(RequestClose); // Calls the base RequestClose
 
             // Hook up logic listeners
-            if (_soundRow != null && _soundRow.RowToggle != null) _soundRow.RowToggle.onValueChanged.AddListener(OnSoundToggled);
-            if (_musicRow != null && _musicRow.RowToggle != null) _musicRow.RowToggle.onValueChanged.AddListener(OnMusicToggled);
-            if (_vibrationRow != null && _vibrationRow.RowToggle != null) _vibrationRow.RowToggle.onValueChanged.AddListener(OnVibrationToggled);
-            if (_notificationsRow != null && _notificationsRow.RowToggle != null) _notificationsRow.RowToggle.onValueChanged.AddListener(OnNotificationsToggled);
+            if (_soundRow != null) _soundRow.OnSwitchToggled += OnSoundToggled;
+            if (_musicRow != null) _musicRow.OnSwitchToggled += OnMusicToggled;
+            if (_vibrationRow != null) _vibrationRow.OnSwitchToggled += OnVibrationToggled;
+            if (_notificationsRow != null) _notificationsRow.OnSwitchToggled += OnNotificationsToggled;
             if (_languageRow != null && _languageRow.ActionButton != null) _languageRow.ActionButton.onClick.AddListener(OnLanguageClicked);
 
             // Global Subscriptions
@@ -53,10 +53,10 @@ namespace TripledotCase.UI.Popup
 
             if (_closeButton != null) _closeButton.onClick.RemoveListener(RequestClose);
 
-            if (_soundRow != null && _soundRow.RowToggle != null) _soundRow.RowToggle.onValueChanged.RemoveListener(OnSoundToggled);
-            if (_musicRow != null && _musicRow.RowToggle != null) _musicRow.RowToggle.onValueChanged.RemoveListener(OnMusicToggled);
-            if (_vibrationRow != null && _vibrationRow.RowToggle != null) _vibrationRow.RowToggle.onValueChanged.RemoveListener(OnVibrationToggled);
-            if (_notificationsRow != null && _notificationsRow.RowToggle != null) _notificationsRow.RowToggle.onValueChanged.RemoveListener(OnNotificationsToggled);
+            if (_soundRow != null) _soundRow.OnSwitchToggled -= OnSoundToggled;
+            if (_musicRow != null) _musicRow.OnSwitchToggled -= OnMusicToggled;
+            if (_vibrationRow != null) _vibrationRow.OnSwitchToggled -= OnVibrationToggled;
+            if (_notificationsRow != null) _notificationsRow.OnSwitchToggled -= OnNotificationsToggled;
             if (_languageRow != null && _languageRow.ActionButton != null) _languageRow.ActionButton.onClick.RemoveListener(OnLanguageClicked);
 
             LocalizationManager.OnLanguageChanged -= SyncLanguageRowIcon;

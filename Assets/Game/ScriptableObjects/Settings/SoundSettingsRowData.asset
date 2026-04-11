@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024e0588c9b34a045a4bb96d81d65809, type: 3}
   m_Name: SoundSettingsRowData
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.UI.Popup.SettingsRowData
-  Icon: {fileID: 21300000, guid: b3d0bb3e0c2f63542a8e0dbf14205ccc, type: 3}
+  Icon: {fileID: 21300000, guid: 4331099709da2dd4c957d1c12a8293d1, type: 3}
+  ToggleOnIcon: {fileID: 21300000, guid: 98cf7f3f6cd2f8d4db29a024fb4959b0, type: 3}
+  ToggleOffIcon: {fileID: 21300000, guid: 01ff3b808aa4824439f5ed6e6f8ef824, type: 3}
   LocalizationKey: popup.settings.sound
   UseToggle: 1
   UseChevron: 0

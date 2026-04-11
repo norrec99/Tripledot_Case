@@ -10,6 +10,8 @@ namespace TripledotCase.UI.Popup
     public class SettingsRowData : ScriptableObject
     {
         public Sprite Icon;
+        public Sprite ToggleOnIcon;
+        public Sprite ToggleOffIcon;
         [Tooltip("e.g. popup.settings.row.sound")]
         public string LocalizationKey;
         public bool UseToggle = true;

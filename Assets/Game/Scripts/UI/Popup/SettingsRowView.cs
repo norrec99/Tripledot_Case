@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using TripledotCase.UI.Core;
 using UnityEngine;
@@ -20,8 +21,16 @@ namespace TripledotCase.UI.Popup
         [SerializeField] private TextMeshProUGUI _label;
 
         [Header("Right Side (Interactive)")]
-        [Tooltip("Assign the on/off switch here if this row uses a toggle (Music, Sound, etc).")]
-        [SerializeField] private Toggle _toggle;
+        [Tooltip("Assign the root GameObject of the switch here if this row uses a custom switch.")]
+        [SerializeField] private GameObject _switchRoot;
+        [Tooltip("A single giant invisible button that covers the entire switch background!")]
+        [SerializeField] private Button _switchButton;
+        [SerializeField] private RectTransform _switchHandle;
+        [Tooltip("The Image component that swaps sprites.")]
+        [SerializeField] private Image _switchDynamicImage;
+        [SerializeField] private float _handleOnX = 22f;
+        [SerializeField] private float _handleOffX = -22f;
+        [SerializeField] private float _switchDuration = 0.2f;
 
         [Tooltip("Assign the chevron/arrow button here if this row goes to another menu (Language).")]
         [SerializeField] private Button _actionButton;
@@ -30,7 +39,9 @@ namespace TripledotCase.UI.Popup
         [Tooltip("Assign the thin bottom divider line GameObject here.")]
         [SerializeField] private GameObject _divider;
 
-        public Toggle RowToggle => _toggle;
+        public System.Action<bool> OnSwitchToggled;
+        private bool _isSwitchOn = true;
+
         public Button ActionButton => _actionButton;
 
         private bool _isIconOverridden = false;
@@ -55,14 +66,54 @@ namespace TripledotCase.UI.Popup
 #endif
             }
 
-            if (_toggle != null)
-                _toggle.gameObject.SetActive(_data.UseToggle);
+            if (_switchRoot != null)
+            {
+                _switchRoot.SetActive(_data.UseToggle);
+                if (_switchDynamicImage != null && _data.UseToggle && _data.ToggleOnIcon != null && _data.ToggleOffIcon != null)
+                {
+                    _switchDynamicImage.sprite = _isSwitchOn ? _data.ToggleOnIcon : _data.ToggleOffIcon;
+                }
+            }
 
             if (_actionButton != null)
                 _actionButton.gameObject.SetActive(_data.UseChevron);
 
             if (_divider != null)
                 _divider.SetActive(_data.ShowDivider);
+        }
+
+        private void Awake()
+        {
+            // A single button just inverts whatever the current state is!
+            if (_switchButton != null) _switchButton.onClick.AddListener(() => SetSwitchState(!_isSwitchOn, true));
+        }
+
+        private void OnDestroy()
+        {
+            if (_switchButton != null) _switchButton.onClick.RemoveAllListeners();
+        }
+
+        public void SetSwitchState(bool isOn, bool animate = false)
+        {
+            _isSwitchOn = isOn;
+            float targetX = isOn ? _handleOnX : _handleOffX;
+
+            if (_switchHandle != null)
+            {
+                _switchHandle.DOKill();
+                if (animate)
+                    _switchHandle.DOAnchorPosX(targetX, _switchDuration).SetEase(Ease.OutCubic);
+                else
+                    _switchHandle.anchoredPosition = new Vector2(targetX, _switchHandle.anchoredPosition.y);
+            }
+
+            if (_switchDynamicImage != null && _data != null && _data.ToggleOnIcon != null && _data.ToggleOffIcon != null)
+            {
+                _switchDynamicImage.sprite = isOn ? _data.ToggleOnIcon : _data.ToggleOffIcon;
+            }
+
+            if (animate)
+                OnSwitchToggled?.Invoke(isOn);
         }
 
         private void Start()
