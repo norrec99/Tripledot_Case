@@ -34,6 +34,8 @@ namespace TripledotCase.UI.Screens
 
         [Header("Secret Sauce (VFX)")]
         [SerializeField] private GameObject _shineVFX;
+        [SerializeField] private GameObject _constantShineVFX;
+        [SerializeField] private GameObject _starVFX;
 
         [Header("Actions")]
         [Tooltip("The CanvasGroup holding your buttons so they cleanly fade in at the end")]
@@ -74,6 +76,12 @@ namespace TripledotCase.UI.Screens
 
         // ── Animation Choreography ───────────────────────────────────────────────────
 
+        private void ToggleStarVFX(bool isActive)
+        {
+            _starVFX.SetActive(isActive);
+            _constantShineVFX.SetActive(isActive);
+        }
+
         private void SequenceDemoEntry()
         {
             gameObject.SetActive(true);
@@ -83,8 +91,10 @@ namespace TripledotCase.UI.Screens
             _mainCanvasGroup.alpha = 0f;
             _mainCanvasGroup.blocksRaycasts = true; // Enable clicking
 
-            if (_titleGroup != null) _titleGroup.alpha = 0f;
-            _titleText.anchoredPosition = _titleTargetPos - new Vector2(0, 150f); // 150px BELOW the target
+            // Title Bounce Setup: Lock the text rigidly in place, and scale it to 0
+            _titleText.anchoredPosition = _titleTargetPos;
+            _titleText.localScale = Vector3.zero;
+            if (_titleGroup != null) _titleGroup.alpha = 1f;
 
             // Hide star until it's ready to slam
             _bigStar.localScale = Vector3.zero;
@@ -113,10 +123,8 @@ namespace TripledotCase.UI.Screens
                 // First, calmly fade the dark blue background in
                 .Append(_mainCanvasGroup.DOFade(1f, 0.4f));
 
-            // Smooth float & fade title up from below
-            _entrySequence.Append(_titleText.DOAnchorPos(_titleTargetPos, 0.8f).SetEase(Ease.OutCubic));
-            if (_titleGroup != null)
-                _entrySequence.Insert(0.4f, _titleGroup.DOFade(1f, 0.7f)); // Starts right after background fade
+            // Bouncy Scale effect for Title Data
+            _entrySequence.Insert(0.4f, _titleText.DOScale(1f, 0.6f).SetEase(Ease.OutBounce, 1.7f));
 
             // Build the Epic Star SLAM sequence
             Sequence starSlam = DOTween.Sequence();
@@ -135,6 +143,7 @@ namespace TripledotCase.UI.Screens
             starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic));
             starSlam.InsertCallback(3f, () => _shineVFX.SetActive(false));
+            starSlam.InsertCallback(0.6f, () => ToggleStarVFX(true));
 
 
             _entrySequence
@@ -186,6 +195,8 @@ namespace TripledotCase.UI.Screens
         {
             Debug.Log("[LevelCompleted] Hide() triggered!");
             _entrySequence?.Kill();
+
+            ToggleStarVFX(false);
 
             // Prevent spam clicking while fading out
             if (_mainCanvasGroup != null)
