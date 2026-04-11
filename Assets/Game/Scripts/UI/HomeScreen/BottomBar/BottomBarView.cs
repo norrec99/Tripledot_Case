@@ -66,7 +66,7 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
             _rectTransform = GetComponent<RectTransform>();
             _shownPositionY = _rectTransform.anchoredPosition.y;
-            SetBarImmediate(hidden: true);
+            SetBarImmediate(hidden: false);
         }
 
         // Start() is guaranteed to run after ALL Awake() calls — safe to read initial button states
@@ -122,14 +122,22 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
             _barSequence = DOTween.Sequence()
                 .Join(_rectTransform.DOAnchorPosY(_shownPositionY + _hiddenOffsetY, _disappearDuration)
                                     .SetEase(Ease.InBack));
+
+            _barSequence.OnComplete(() => EventManager.FireBarClosed());
         }
 
         // ── Private: Click Routing ─────────────────────────────────────────────────
 
         private void HandleButtonClicked(BottomBarButtonView clicked)
         {
-            // Already active — do nothing
-            if (clicked.IsActive) return;
+            // Already active — toggle it OFF!
+            if (clicked.IsActive) 
+            {
+                clicked.Deactivate();
+                _activeButton = null;
+                HideIndicator();
+                return;
+            }
 
             // Switch: deactivate previous, slide indicator, activate new
             _activeButton?.Deactivate();
@@ -145,6 +153,15 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         }
 
         // ── Private: Indicator Animation ──────────────────────────────────────────
+        
+        /// <summary>Shrinks and hides the indicator entirely (used when a button is toggled off).</summary>
+        private void HideIndicator()
+        {
+            _indicatorSequence?.Kill();
+            _indicatorSequence = DOTween.Sequence()
+                .Append(_activeIndicator.DOScale(0f, _hideOutDuration).SetEase(Ease.InBack))
+                .OnComplete(() => _activeIndicator.gameObject.SetActive(false));
+        }
 
         /// <summary>Instantly positions the indicator with no animation (used on scene load).</summary>
         private void SnapIndicatorTo(BottomBarButtonView target)
@@ -154,16 +171,15 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
             // Force layout groups to calculate their sizes so we can read the correct width
             Canvas.ForceUpdateCanvases();
             var targetRect = target.GetComponent<RectTransform>();
-            
+
             // Apply dynamic width, but keep the custom Designer height (e.g. 270)
             _activeIndicator.sizeDelta = new Vector2(targetRect.rect.width, _indicatorHeight);
 
             // Snap only the X axis to match the button; leave Y exactly where it was in the Inspector
             _activeIndicator.position = new Vector3(target.transform.position.x, _activeIndicator.position.y, _activeIndicator.position.z);
-            
-            _activeIndicator.localScale = Vector3.zero;
+
+            _activeIndicator.localScale = Vector3.one;
             _activeIndicator.gameObject.SetActive(true);
-            _activeIndicator.DOScale(1f, _popInDuration).SetEase(Ease.OutBack);
         }
 
         /// <summary>Slides the indicator to the target button's position.
@@ -185,6 +201,8 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
                 .Join(_activeIndicator.DOMoveX(target.transform.position.x, _slideDuration)
                                       .SetEase(_slideEase))
                 .Join(_activeIndicator.DOSizeDelta(new Vector2(targetRect.rect.width, _indicatorHeight), _slideDuration)
+                                      .SetEase(_slideEase))
+                .Join(_activeIndicator.DOScale(1f, _slideDuration) // Failsafe recovery if interrupted while hiding!
                                       .SetEase(_slideEase));
         }
 

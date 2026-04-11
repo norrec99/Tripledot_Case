@@ -77,9 +77,9 @@ namespace TripledotCase.UI.Core
         public static void ClearAllListeners()
         {
             OnContentActivated = null;
-            OnBarClosed        = null;
-            OnSettingsClicked  = null;
-            OnPopupClosed      = null;
+            OnBarClosed = null;
+            OnSettingsClicked = null;
+            OnPopupClosed = null;
             OnLevelCompletedTriggered = null;
             OnLevelCompletedClosed = null;
         }

@@ -30,11 +30,6 @@ namespace TripledotCase.UI.HomeScreen
             InitializeDemoValues();
         }
 
-        private void Start()
-        {
-            _bottomBarView.Appear();
-        }
-
         private void OnDestroy()
         {
             // Always unsubscribe on teardown to prevent stale delegate references
