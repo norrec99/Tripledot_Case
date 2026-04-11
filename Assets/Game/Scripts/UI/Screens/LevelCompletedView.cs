@@ -21,7 +21,6 @@ namespace TripledotCase.UI.Screens
         [Tooltip("Attach a CanvasGroup to your Title Text so we can cleanly fade it!")]
         [SerializeField] private CanvasGroup _titleGroup;
         [SerializeField] private Transform _bigStar;
-        [SerializeField] private CanvasGroup _lightRaysGroup;
 
         [Header("Score Configuration")]
         [Tooltip("The massive score text sitting directly under the star")]
@@ -34,7 +33,7 @@ namespace TripledotCase.UI.Screens
         [SerializeField] private System.Collections.Generic.List<RewardView> _rewards;
 
         [Header("Secret Sauce (VFX)")]
-        [SerializeField] private UIParticleBurst _starBurstVFX;
+        [SerializeField] private GameObject _shineVFX;
 
         [Header("Actions")]
         [Tooltip("The CanvasGroup holding your buttons so they cleanly fade in at the end")]
@@ -60,7 +59,7 @@ namespace TripledotCase.UI.Screens
                 _buttonContainer.alpha = 0f;
                 _buttonContainer.interactable = false;
             }
-            
+
             _mainCanvasGroup.alpha = 0f;
             gameObject.SetActive(false);
         }
@@ -89,7 +88,6 @@ namespace TripledotCase.UI.Screens
 
             // Hide star until it's ready to slam
             _bigStar.localScale = Vector3.zero;
-            _lightRaysGroup.alpha = 0f;
 
             if (_buttonContainer != null)
             {
@@ -125,22 +123,23 @@ namespace TripledotCase.UI.Screens
             starSlam.AppendCallback(() =>
             {
                 // Teleport the star to be massive and rotated right before the visible tween starts
-                _bigStar.localScale = Vector3.one * 5.5f;
-                _bigStar.localRotation = Quaternion.Euler(0, 0, 65f);
+                _bigStar.localScale = Vector3.one * 3.5f;
+                _bigStar.localRotation = Quaternion.Euler(0, 0, 90f);
             });
             // Slam it down into the pillow while rotating back perfectly straight!
-            starSlam.Append(_bigStar.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack, 1.2f));
-            starSlam.Join(_bigStar.DORotate(Vector3.zero, 0.25f).SetEase(Ease.OutBack, 1.2f));
+            starSlam.Append(_bigStar.DOScale(Vector3.one, 0.25f));
+            starSlam.Join(_bigStar.DORotate(Vector3.zero, 0.25f));
+            starSlam.Append(_bigStar.DOScale(Vector3.one * 0.6f, 0f));
+            starSlam.InsertCallback(0.25f, () => _shineVFX.SetActive(true));
+            // starSlam.Append(_bigStar.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutBack, 2.4f));
+            starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
+            starSlam.Append(_bigStar.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic));
+            starSlam.InsertCallback(3f, () => _shineVFX.SetActive(false));
+
 
             _entrySequence
                 // Insert the slam sequence right after the title starts floating
-                .Insert(0.6f, starSlam)
-
-                // The precise millisecond the star impacts the pillow (0.6 delay + 0.25 slam = 0.85s), fire the explosion!
-                .InsertCallback(0.85f, () => { if (_starBurstVFX != null) _starBurstVFX.FireBurst(); })
-
-                // Fade in the infinitely-spinning light rays sitting behind the star just before impact
-                .Insert(0.7f, _lightRaysGroup.DOFade(1f, 1f));
+                .Insert(0.6f, starSlam);
 
             // Execute the Main Score Pop exactly after the star settles
             if (_mainScoreText != null)
@@ -154,7 +153,7 @@ namespace TripledotCase.UI.Screens
             // Pop the rewards from the sky one by one exactly after everything is settled
             // The Star impact + explosion ends around 0.85s
             float buttonFadeTime = 1.1f; // Fallback time just in case there are no rewards
-            
+
             if (_rewards != null && _rewards.Count > 0)
             {
                 float sequenceDelay = 1.1f;
@@ -162,13 +161,13 @@ namespace TripledotCase.UI.Screens
                 {
                     RewardView localReward = reward;
 
-                    if (localReward != null) 
+                    if (localReward != null)
                         _entrySequence.Insert(sequenceDelay, localReward.PlayEntryAndCount(0.5f, 0.8f));
-                        
+
                     // Stagger the next reward's pop by 0.2s
                     sequenceDelay += 0.2f;
                 }
-                
+
                 // Calculate the exact millisecond the FINAL reward hits the pillow/ground
                 // The last reward started at (sequenceDelay - 0.2f) and takes 0.5s to drop
                 buttonFadeTime = (sequenceDelay - 0.2f) + 0.5f;
