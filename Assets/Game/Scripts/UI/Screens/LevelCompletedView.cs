@@ -23,6 +23,12 @@ namespace TripledotCase.UI.Screens
         [SerializeField] private Transform _bigStar;
         [SerializeField] private CanvasGroup _lightRaysGroup;
 
+        [Header("Score Configuration")]
+        [Tooltip("The massive score text sitting directly under the star")]
+        [SerializeField] private TextMeshProUGUI _mainScoreText;
+        [Tooltip("Target to count up to for the demo")]
+        [SerializeField] private int _targetScore = 250;
+
         [Header("Tick-Up Counters")]
         [Tooltip("Drop your RewardView prefabs spanning across the screen here!")]
         [SerializeField] private System.Collections.Generic.List<RewardView> _rewards;
@@ -31,6 +37,8 @@ namespace TripledotCase.UI.Screens
         [SerializeField] private UIParticleBurst _starBurstVFX;
 
         [Header("Actions")]
+        [Tooltip("The CanvasGroup holding your buttons so they cleanly fade in at the end")]
+        [SerializeField] private CanvasGroup _buttonContainer;
         [SerializeField] private Button _homeButton;
 
         private Sequence _entrySequence;
@@ -47,6 +55,12 @@ namespace TripledotCase.UI.Screens
                 _homeButton.onClick.AddListener(Hide);
 
             // Hide the screen initially
+            if (_buttonContainer != null)
+            {
+                _buttonContainer.alpha = 0f;
+                _buttonContainer.interactable = false;
+            }
+            
             _mainCanvasGroup.alpha = 0f;
             gameObject.SetActive(false);
         }
@@ -69,12 +83,27 @@ namespace TripledotCase.UI.Screens
             // 1. Reset all elements back to an invisible "waiting" state
             _mainCanvasGroup.alpha = 0f;
             _mainCanvasGroup.blocksRaycasts = true; // Enable clicking
-            
+
             if (_titleGroup != null) _titleGroup.alpha = 0f;
             _titleText.anchoredPosition = _titleTargetPos - new Vector2(0, 150f); // 150px BELOW the target
-            
+
+            // Hide star until it's ready to slam
             _bigStar.localScale = Vector3.zero;
             _lightRaysGroup.alpha = 0f;
+
+            if (_buttonContainer != null)
+            {
+                _buttonContainer.alpha = 0f;
+                _buttonContainer.interactable = false; // Prevent clicking while invisible!
+            }
+
+            // Reset Main Score
+            if (_mainScoreText != null)
+            {
+                _mainScoreText.text = "";
+                _mainScoreText.alpha = 0f;
+                _mainScoreText.transform.localScale = Vector3.one * 0.5f;
+            }
 
             if (_rewards != null)
             {
@@ -88,35 +117,68 @@ namespace TripledotCase.UI.Screens
 
             // Smooth float & fade title up from below
             _entrySequence.Append(_titleText.DOAnchorPos(_titleTargetPos, 0.8f).SetEase(Ease.OutCubic));
-            if (_titleGroup != null) 
+            if (_titleGroup != null)
                 _entrySequence.Insert(0.4f, _titleGroup.DOFade(1f, 0.7f)); // Starts right after background fade
 
-            _entrySequence
-                // SNAP the big star into existence using an overshoot curve
-                .Insert(0.6f, _bigStar.DOScale(1f, 0.6f).SetEase(Ease.OutBack, 1.5f))
-
-                // EXACTLY as the star reaches max size, fire the 2D star explosion VFX
-                .InsertCallback(0.7f, () => { if (_starBurstVFX != null) _starBurstVFX.FireBurst(); })
-
-                // Slowly fade in the infinitely-spinning light rays sitting behind the star
-                .Insert(0.6f, _lightRaysGroup.DOFade(1f, 1f));
-
-            // Drop the rewards from the sky one by one exactly after the Big Star finishes its intro!
-            // The big star pops from 0.6s and lasts 0.6s (finishing at 1.2s total on the timeline).
-            if (_rewards != null)
+            // Build the Epic Star SLAM sequence
+            Sequence starSlam = DOTween.Sequence();
+            starSlam.AppendCallback(() =>
             {
-                float dropDelay = 1.2f;
+                // Teleport the star to be massive and rotated right before the visible tween starts
+                _bigStar.localScale = Vector3.one * 5.5f;
+                _bigStar.localRotation = Quaternion.Euler(0, 0, 65f);
+            });
+            // Slam it down into the pillow while rotating back perfectly straight!
+            starSlam.Append(_bigStar.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack, 1.2f));
+            starSlam.Join(_bigStar.DORotate(Vector3.zero, 0.25f).SetEase(Ease.OutBack, 1.2f));
+
+            _entrySequence
+                // Insert the slam sequence right after the title starts floating
+                .Insert(0.6f, starSlam)
+
+                // The precise millisecond the star impacts the pillow (0.6 delay + 0.25 slam = 0.85s), fire the explosion!
+                .InsertCallback(0.85f, () => { if (_starBurstVFX != null) _starBurstVFX.FireBurst(); })
+
+                // Fade in the infinitely-spinning light rays sitting behind the star just before impact
+                .Insert(0.7f, _lightRaysGroup.DOFade(1f, 1f));
+
+            // Execute the Main Score Pop exactly after the star settles
+            if (_mainScoreText != null)
+            {
+                _entrySequence.InsertCallback(0.7f, () => _mainScoreText.text = "0");
+                _entrySequence.Insert(0.7f, _mainScoreText.DOFade(1f, 0.3f));
+                _entrySequence.Insert(0.7f, _mainScoreText.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBack, 1.5f));
+                _entrySequence.Insert(0.7f, DOVirtual.Int(0, _targetScore, 1.0f, v => _mainScoreText.text = v.ToString("N0")).SetEase(Ease.OutExpo));
+            }
+
+            // Pop the rewards from the sky one by one exactly after everything is settled
+            // The Star impact + explosion ends around 0.85s
+            float buttonFadeTime = 1.1f; // Fallback time just in case there are no rewards
+            
+            if (_rewards != null && _rewards.Count > 0)
+            {
+                float sequenceDelay = 1.1f;
                 foreach (var reward in _rewards)
                 {
                     RewardView localReward = reward;
-                    
-                    // Insert the chained sequence (Drop -> Count Up) perfectly into the master timeline
+
                     if (localReward != null) 
-                        _entrySequence.Insert(dropDelay, localReward.PlayEntryAndCount(0.6f, 0.8f));
+                        _entrySequence.Insert(sequenceDelay, localReward.PlayEntryAndCount(0.5f, 0.8f));
                         
-                    // Stagger the next reward's drop by 0.2s
-                    dropDelay += 0.2f;
+                    // Stagger the next reward's pop by 0.2s
+                    sequenceDelay += 0.2f;
                 }
+                
+                // Calculate the exact millisecond the FINAL reward hits the pillow/ground
+                // The last reward started at (sequenceDelay - 0.2f) and takes 0.5s to drop
+                buttonFadeTime = (sequenceDelay - 0.2f) + 0.5f;
+            }
+
+            // Finally, cleanly fade the interaction buttons in!
+            if (_buttonContainer != null)
+            {
+                _entrySequence.Insert(buttonFadeTime, _buttonContainer.DOFade(1f, 0.4f));
+                _entrySequence.InsertCallback(buttonFadeTime, () => _buttonContainer.interactable = true);
             }
         }
 

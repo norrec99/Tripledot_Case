@@ -18,6 +18,10 @@ namespace TripledotCase.UI.Screens
         [SerializeField] private Image _iconImage;
         [SerializeField] private TextMeshProUGUI _amountText;
 
+        [Header("Animation")]
+        [Tooltip("Leave empty to animate this root object, or drag a child RectTransform here if this script sits on a Layout Wrapper!")]
+        [SerializeField] private RectTransform _animatorRect;
+
         private void OnValidate()
         {
             if (_data == null) return;
@@ -33,47 +37,46 @@ namespace TripledotCase.UI.Screens
 #endif
         }
 
-        private RectTransform _rect;
-        private Vector2 _targetPos;
-        private bool _isPosCached = false;
+        private RectTransform _targetRect;
+        private CanvasGroup _canvasGroup;
 
         /// <summary>
-        /// Pushes the reward way above the screen and zeros the counter, ready for the drop sequence!
+        /// Shrinks the reward, makes it transparent, and hides the text completely ready for the intro!
         /// </summary>
         public void PrepareForEntry()
         {
-            if (_rect == null) _rect = GetComponent<RectTransform>();
+            _targetRect = _animatorRect != null ? _animatorRect : GetComponent<RectTransform>();
             
-            // Only cache the position ONCE! If we cache it midway through an animation, it corrupts the baseline!
-            if (!_isPosCached) 
-            {
-                _targetPos = _rect.anchoredPosition;
-                _isPosCached = true;
-            }
+            // Failsafe: Ensures we can cleanly fade the element without caring about what type of Images/Texts it uses
+            _canvasGroup = _targetRect.GetComponent<CanvasGroup>();
+            if (_canvasGroup == null) _canvasGroup = _targetRect.gameObject.AddComponent<CanvasGroup>();
             
-            // Move it 800px up into the sky
-            _rect.anchoredPosition = _targetPos + new Vector2(0, 800f);
+            // Start tiny and invisible!
+            _targetRect.localScale = Vector3.one * 0.5f;
+            _canvasGroup.alpha = 0f;
 
-            if (_amountText != null) _amountText.text = "0";
+            // Hide text completely
+            if (_amountText != null) _amountText.text = "";
         }
 
         /// <summary>
-        /// Chains a physical sky-drop and perfectly times the DOCounter sequence to start exactly when the drop finishes!
+        /// Fades and scales the reward in, then pops the text onto the screen and counts it up.
         /// </summary>
-        public Sequence PlayEntryAndCount(float dropDuration, float countDuration)
+        public Sequence PlayEntryAndCount(float entryDuration, float countDuration)
         {
             Sequence seq = DOTween.Sequence();
 
-            if (_rect != null)
+            if (_targetRect != null && _canvasGroup != null)
             {
-                // Drop from the sky with a heavy, satisfying bounce
-                seq.Append(_rect.DOAnchorPos(_targetPos, dropDuration).SetEase(Ease.OutBounce));
+                // Smoothly fade in while softly popping the scale to 1.0!
+                seq.Append(_targetRect.DOScale(Vector3.one, entryDuration).SetEase(Ease.OutBack, 1.2f));
+                seq.Join(_canvasGroup.DOFade(1f, entryDuration));
             }
 
             if (_data != null && _amountText != null)
             {
-                // Tick the numbers up immediately after the bounce finishes
-                seq.AppendCallback(() => _amountText.text = "0"); // safeguard
+                // Instantly appear as "0" exactly when the fade finishes, then start counting
+                seq.AppendCallback(() => _amountText.text = "0"); 
                 seq.Append(DOVirtual.Int(0, _data.Amount, countDuration, v => _amountText.text = v.ToString("N0")).SetEase(Ease.OutExpo));
             }
 
