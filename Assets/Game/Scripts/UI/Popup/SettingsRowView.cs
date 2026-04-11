@@ -102,7 +102,7 @@ namespace TripledotCase.UI.Popup
             {
                 _switchHandle.DOKill();
                 if (animate)
-                    _switchHandle.DOAnchorPosX(targetX, _switchDuration).SetEase(Ease.OutCubic);
+                    _switchHandle.DOAnchorPosX(targetX, _switchDuration).SetEase(Ease.OutBack, 2.1f);
                 else
                     _switchHandle.anchoredPosition = new Vector2(targetX, _switchHandle.anchoredPosition.y);
             }
