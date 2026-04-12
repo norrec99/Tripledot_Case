@@ -113,7 +113,10 @@ namespace TripledotCase.UI.Popup
             }
 
             if (animate)
+            {
+                Taptic.Light();
                 OnSwitchToggled?.Invoke(isOn);
+            }
         }
 
         private void Start()

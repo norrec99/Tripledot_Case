@@ -31,6 +31,7 @@ namespace TripledotCase.UI.Core
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            Taptic.Light(); // Gated internally by Taptic.tapticOn
             _animSequence?.Kill();
             _animSequence = DOTween.Sequence()
                 .Append(transform.DOScale(_originalScale * _pressScaleMultiplier, _animationDuration)

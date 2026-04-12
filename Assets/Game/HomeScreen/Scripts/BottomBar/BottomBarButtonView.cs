@@ -166,8 +166,17 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
         // ── Private ────────────────────────────────────────────────────────────────
 
-        private void HandleNavClick() => OnButtonClicked?.Invoke(this);
-        private void HandleLockedClick() => OnLockedButtonClicked?.Invoke(this);
+        private void HandleNavClick()
+        {
+            Taptic.Light();
+            OnButtonClicked?.Invoke(this);
+        }
+
+        private void HandleLockedClick()
+        {
+            Taptic.Warning(); // Stronger feel to signal "this action is unavailable"
+            OnLockedButtonClicked?.Invoke(this);
+        }
 
         private void ApplyStateImmediate(ButtonState state)
         {

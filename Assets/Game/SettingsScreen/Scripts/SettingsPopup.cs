@@ -11,6 +11,7 @@ namespace TripledotCase.UI.Popup
     /// </summary>
     public class SettingsPopup : PopupBase
     {
+        private const string PrefVibration = "setting_vibration";
         [Header("Settings Rows")]
         [SerializeField] private SettingsRowView _soundRow;
         [SerializeField] private SettingsRowView _musicRow;
@@ -76,8 +77,10 @@ namespace TripledotCase.UI.Popup
 
         private void SyncStateFromData()
         {
-            // In a real app, you would load from PlayerPrefs or a SaveData model here.
-            Debug.Log("[SettingsPopup] Synced UI bounds to current player preferences.");
+            // Load persisted vibration state and sync both the Taptic engine and the switch UI
+            bool vibrationOn = PlayerPrefs.GetInt(PrefVibration, 1) == 1;
+            Taptic.tapticOn = vibrationOn;
+            _vibrationRow?.SetSwitchState(vibrationOn, animate: false);
         }
 
         private void Start()
@@ -99,7 +102,12 @@ namespace TripledotCase.UI.Popup
 
         private void OnSoundToggled(bool isOn) => Debug.Log($"[SettingsPopup] Sound toggled: {isOn}");
         private void OnMusicToggled(bool isOn) => Debug.Log($"[SettingsPopup] Music toggled: {isOn}");
-        private void OnVibrationToggled(bool isOn) => Debug.Log($"[SettingsPopup] Vibration toggled: {isOn}");
+        private void OnVibrationToggled(bool isOn)
+        {
+            Taptic.tapticOn = isOn;
+            PlayerPrefs.SetInt(PrefVibration, isOn ? 1 : 0);
+            PlayerPrefs.Save();
+        }
         private void OnNotificationsToggled(bool isOn) => Debug.Log($"[SettingsPopup] Notifications toggled: {isOn}");
 
         private void OnLanguageClicked()

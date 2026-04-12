@@ -77,6 +77,7 @@ namespace TripledotCase.UI.Screens
 
         private void ToggleVFX(bool isActive)
         {
+            if (isActive) Taptic.Success(); // Particle burst moment — double-pulse celebration!
             _starVFX.SetActive(isActive);
             _constantShineVFX.SetActive(isActive);
             _shineVFX.SetActive(isActive);
@@ -139,6 +140,7 @@ namespace TripledotCase.UI.Screens
             // Slam it down into the center while rotating back perfectly straight!
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.25f));
             starSlam.Join(_bigStar.DORotate(Vector3.zero, 0.25f));
+            starSlam.AppendCallback(() => Taptic.Heavy()); // Physical impact moment!
             starSlam.Append(_bigStar.DOScale(Vector3.one * 0.6f, 0f));
             starSlam.InsertCallback(0.25f, () => _shineVFX.SetActive(true));
             starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
