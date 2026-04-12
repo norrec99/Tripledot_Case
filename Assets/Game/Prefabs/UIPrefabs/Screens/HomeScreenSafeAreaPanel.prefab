@@ -305,8 +305,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Complete
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9f7de2b767ed2c547b6c19540e26462c, type: 2}
-  m_sharedMaterial: {fileID: 7528272641643436593, guid: 9f7de2b767ed2c547b6c19540e26462c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64fb354c2e2a3274eb5f761bcf31f42d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: db751c48e716af74091ea953e74b8daa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 2.988781, z: 0, w: 11.841217}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -609,6 +609,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3250804714565307634, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3352905665111783448, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -703,6 +707,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5213387781479578059, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500454681835979302, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5518427351192672759, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
@@ -803,6 +811,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7793955680054267512, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636779061634559942, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8712959471779859178, guid: 6faaa7881a2b98f46a9ece255a87f163, type: 3}
