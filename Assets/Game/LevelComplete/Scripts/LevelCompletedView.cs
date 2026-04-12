@@ -75,10 +75,11 @@ namespace TripledotCase.UI.Screens
 
         // ── Animation Choreography ───────────────────────────────────────────────────
 
-        private void ToggleStarVFX(bool isActive)
+        private void ToggleVFX(bool isActive)
         {
             _starVFX.SetActive(isActive);
             _constantShineVFX.SetActive(isActive);
+            _shineVFX.SetActive(isActive);
         }
 
         private void SequenceDemoEntry()
@@ -143,7 +144,7 @@ namespace TripledotCase.UI.Screens
             starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic));
             starSlam.InsertCallback(3f, () => _shineVFX.SetActive(false));
-            starSlam.InsertCallback(0.6f, () => ToggleStarVFX(true));
+            starSlam.InsertCallback(0.6f, () => ToggleVFX(true));
 
 
             _entrySequence
@@ -196,7 +197,7 @@ namespace TripledotCase.UI.Screens
             Debug.Log("[LevelCompleted] Hide() triggered!");
             _entrySequence?.Kill();
 
-            ToggleStarVFX(false);
+            ToggleVFX(false);
 
             // Prevent spam clicking while fading out
             if (_mainCanvasGroup != null)
