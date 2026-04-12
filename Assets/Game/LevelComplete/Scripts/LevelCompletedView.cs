@@ -144,7 +144,7 @@ namespace TripledotCase.UI.Screens
             starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic));
             starSlam.InsertCallback(3f, () => _shineVFX.SetActive(false));
-            starSlam.InsertCallback(0.6f, () => ToggleVFX(true));
+            starSlam.InsertCallback(0.5f, () => ToggleVFX(true));
 
 
             _entrySequence
