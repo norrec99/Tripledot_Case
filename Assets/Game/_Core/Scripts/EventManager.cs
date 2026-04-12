@@ -3,12 +3,7 @@ using System;
 namespace TripledotCase.UI.Core
 {
     /// <summary>
-    /// Centralized static event bus for all Home Screen UI events.
-    ///
-    /// Usage:
-    ///   Subscribe  → EventManager.OnContentActivated += MyHandler;
-    ///   Dispatch   → EventManager.FireContentActivated(index);
-    ///   Cleanup    → EventManager.ClearAllListeners(); (call on scene unload)
+    /// Centralized static event bus for all UI events.
     ///
     /// Keeping events here decouples views from one another — no direct
     /// cross-component references are required.

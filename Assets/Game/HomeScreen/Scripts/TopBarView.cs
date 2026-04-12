@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace TripledotCase.UI.HomeScreen
 {
     /// <summary>
-    /// Manages the top currency bar UI, matching the HomeScreen.psd layout:
+    /// Manages the top currency bar UI:
     ///
     ///   [ 🪙 2,850 ]   [ ❤️ 5  Full ]   [ ⭐ 165 ]   [ ⚙️ ]
     ///

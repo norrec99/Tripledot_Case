@@ -1,3 +1,4 @@
+using System;
 using TripledotCase.UI.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,7 +67,7 @@ namespace TripledotCase.UI.Popup
             if (_supportButton != null) _supportButton.onClick.RemoveListener(OnSupportClicked);
         }
 
-        public override void Show(System.Action onShown = null)
+        public override void Show(Action onShown = null)
         {
             // Sync UI to actual saved settings when requested to show
             SyncStateFromData();

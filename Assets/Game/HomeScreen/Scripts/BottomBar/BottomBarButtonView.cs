@@ -1,5 +1,7 @@
+using System;
 using DG.Tweening;
 using TMPro;
+using TripledotCase.UI.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,8 +71,8 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         public float ActiveWidth => _activeWidth;
         public float NativeWidth => _idleWidth;
 
-        public System.Action<BottomBarButtonView> OnButtonClicked;
-        public System.Action<BottomBarButtonView> OnLockedButtonClicked;
+        public Action<BottomBarButtonView> OnButtonClicked;
+        public Action<BottomBarButtonView> OnLockedButtonClicked;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────────
 
@@ -78,7 +80,7 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         {
             if (_label != null)
             {
-                var locText = _label.GetComponent<TripledotCase.UI.Core.LocalizedText>();
+                var locText = _label.GetComponent<LocalizedText>();
                 if (locText != null) locText.SetKey(_localizationKey);
                 else _label.text = _localizationKey; // Fallback placeholder
             }
@@ -86,10 +88,10 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
             _rectTransform = GetComponent<RectTransform>();
             _layoutElement = GetComponent<LayoutElement>();
-            
+
             // Save our native width from the scene so we can safely return to it!
-            _idleWidth = _layoutElement != null && _layoutElement.preferredWidth > 0 
-                ? _layoutElement.preferredWidth 
+            _idleWidth = _layoutElement != null && _layoutElement.preferredWidth > 0
+                ? _layoutElement.preferredWidth
                 : _rectTransform.sizeDelta.x;
 
             _navButton?.onClick.AddListener(HandleNavClick);
@@ -112,7 +114,7 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
         public void AnimateWidthTo(float targetWidth, float overrideDuration = -1f)
         {
             _widthTween?.Kill();
-            
+
             float duration = overrideDuration >= 0 ? overrideDuration : _activateDuration;
 
             // Animate native struct properties dynamically so siblings are pushed gracefully

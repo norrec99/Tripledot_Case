@@ -13,8 +13,6 @@ namespace TripledotCase.UI.HomeScreen
     ///     for UI events (e.g. showing a content panel when a nav button is tapped).
     ///   • Seeds the UI with initial demo data on Awake.
     ///
-    /// By keeping this class thin we make it easy to swap out or extend
-    /// individual views without touching the HomeScreen entry point.
     /// </summary>
     public class HomeScreenView : MonoBehaviour
     {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using TripledotCase.UI.Core;
@@ -9,7 +10,6 @@ namespace TripledotCase.UI.Screens
     /// <summary>
     /// Orchestrates the highly-polished Level Completed entry sequence, featuring
     /// elastic drops, snappy scale bounces, and numbers that dramatically tick up.
-    /// Satisfies Task 3: "focusing on impressive animation and creative flair".
     /// </summary>
     public class LevelCompletedView : MonoBehaviour
     {
@@ -29,7 +29,7 @@ namespace TripledotCase.UI.Screens
 
         [Header("Tick-Up Counters")]
         [Tooltip("Drop your RewardView prefabs spanning across the screen here!")]
-        [SerializeField] private System.Collections.Generic.List<RewardView> _rewards;
+        [SerializeField] private List<RewardView> _rewards;
 
         [Header("Secret Sauce (VFX)")]
         [SerializeField] private GameObject _shineVFX;
@@ -135,12 +135,11 @@ namespace TripledotCase.UI.Screens
                 _bigStar.localScale = Vector3.one * 3.5f;
                 _bigStar.localRotation = Quaternion.Euler(0, 0, 90f);
             });
-            // Slam it down into the pillow while rotating back perfectly straight!
+            // Slam it down into the center while rotating back perfectly straight!
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.25f));
             starSlam.Join(_bigStar.DORotate(Vector3.zero, 0.25f));
             starSlam.Append(_bigStar.DOScale(Vector3.one * 0.6f, 0f));
             starSlam.InsertCallback(0.25f, () => _shineVFX.SetActive(true));
-            // starSlam.Append(_bigStar.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutBack, 2.4f));
             starSlam.Append(_bigStar.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine));
             starSlam.Append(_bigStar.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic));
             starSlam.InsertCallback(3f, () => _shineVFX.SetActive(false));
@@ -178,7 +177,7 @@ namespace TripledotCase.UI.Screens
                     sequenceDelay += 0.2f;
                 }
 
-                // Calculate the exact millisecond the FINAL reward hits the pillow/ground
+                // Calculate the exact millisecond the FINAL reward hits the ground
                 // The last reward started at (sequenceDelay - 0.2f) and takes 0.5s to drop
                 buttonFadeTime = (sequenceDelay - 0.2f) + 0.5f;
             }

@@ -6,7 +6,6 @@ namespace TripledotCase.UI.Core
 {
     /// <summary>
     /// A premium utility component that provides tactile hover/press feedback for any UI element.
-    /// Implements Requirements #4 (Provide clear visual feedback for all interactable elements).
     /// </summary>
     public class AnimatedButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
