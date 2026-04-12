@@ -17,6 +17,7 @@ namespace TripledotCase.UI.Screens
         [SerializeField] private CanvasGroup _mainCanvasGroup;
 
         [Header("Animated Elements")]
+        [SerializeField] private RectTransform _titleTextBack;
         [SerializeField] private RectTransform _titleText;
         [Tooltip("Attach a CanvasGroup to your Title Text so we can cleanly fade it!")]
         [SerializeField] private CanvasGroup _titleGroup;
@@ -93,7 +94,9 @@ namespace TripledotCase.UI.Screens
 
             // Title Bounce Setup: Lock the text rigidly in place, and scale it to 0
             _titleText.anchoredPosition = _titleTargetPos;
+            _titleTextBack.anchoredPosition = _titleTargetPos;
             _titleText.localScale = Vector3.zero;
+            _titleTextBack.localScale = Vector3.zero;
             if (_titleGroup != null) _titleGroup.alpha = 1f;
 
             // Hide star until it's ready to slam
@@ -125,6 +128,7 @@ namespace TripledotCase.UI.Screens
 
             // Bouncy Scale effect for Title Data
             _entrySequence.Insert(0.4f, _titleText.DOScale(1f, 0.6f).SetEase(Ease.OutBounce, 1.7f));
+            _entrySequence.Insert(0.4f, _titleTextBack.DOScale(1f, 0.6f).SetEase(Ease.OutBounce, 1.7f));
 
             // Build the Epic Star SLAM sequence
             Sequence starSlam = DOTween.Sequence();
