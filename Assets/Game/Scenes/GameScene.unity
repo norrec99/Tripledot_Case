@@ -937,6 +937,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 952651156691395488, guid: 3ec22c8df6f863e4ba6391f4db4c0451, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091330598060318677, guid: 3ec22c8df6f863e4ba6391f4db4c0451, type: 3}
       propertyPath: m_Name
       value: LevelCompletedCanvas
@@ -959,6 +963,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1180944831316934114, guid: 3ec22c8df6f863e4ba6391f4db4c0451, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554344004323669109, guid: 3ec22c8df6f863e4ba6391f4db4c0451, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1616673685162195401, guid: 3ec22c8df6f863e4ba6391f4db4c0451, type: 3}
