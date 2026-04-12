@@ -13,7 +13,7 @@ namespace TripledotCase.UI.Popup
     public abstract class PopupBase : MonoBehaviour
     {
         [Header("Base Animation")]
-        [SerializeField] protected float _animationDuration = 0.35f;
+        [SerializeField] protected float _animationDuration = 0.2f;
 
         [Tooltip("The central box that actually bounces in (not the dark background area).")]
         [SerializeField] protected Transform _popupPanel;
