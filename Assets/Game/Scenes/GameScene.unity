@@ -946,22 +946,6 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8672356006548471823, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8672356006548471823, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8672356006548471823, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8672356006548471823, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8865879924878283610, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
       propertyPath: m_Camera
       value: 
