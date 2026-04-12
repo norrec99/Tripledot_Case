@@ -46,7 +46,6 @@ namespace TripledotCase.UI.Popup
 
             _animSequence = DOTween.Sequence()
                 .Join(_canvasGroup.DOFade(0f, _animationDuration))
-                .Join(_popupPanel.DOScale(0.8f, _animationDuration).SetEase(Ease.InBack)) // Shrink slightly to look good
                 .OnComplete(() =>
                 {
                     gameObject.SetActive(false);
