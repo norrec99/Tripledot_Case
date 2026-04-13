@@ -118,6 +118,6 @@ namespace TripledotCase.UI.Popup
 
         private void OnPrivacyClicked() => Debug.Log("[SettingsPopup] Privacy Policy opened.");
         private void OnTermsClicked() => Debug.Log("[SettingsPopup] Terms & Conditions opened.");
-        private void OnSupportClicked() => Debug.Log("[SettingsPopup] Support center opened.");
+        private void OnSupportClicked() => EventManager.FireBlurToggled(); // Debug: toggle blur on/off
     }
 }

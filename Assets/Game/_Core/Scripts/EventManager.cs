@@ -34,6 +34,9 @@ namespace TripledotCase.UI.Core
         /// <summary>Fired when a popup initiates its closing sequence.</summary>
         public static event Action OnPopupClosed;
 
+        /// <summary>Fired by the Support button to toggle the blur overlay on/off (debug helper).</summary>
+        public static event Action OnBlurToggled;
+
         // ── Screens ───────────────────────────────────────────────────────────────
 
         /// <summary>Fired to open the Level Completed screen.</summary>
@@ -57,6 +60,9 @@ namespace TripledotCase.UI.Core
         public static void FirePopupClosed() =>
             OnPopupClosed?.Invoke();
 
+        public static void FireBlurToggled() =>
+            OnBlurToggled?.Invoke();
+
         public static void FireLevelCompletedTriggered() =>
             OnLevelCompletedTriggered?.Invoke();
 
@@ -75,6 +81,7 @@ namespace TripledotCase.UI.Core
             OnBarClosed = null;
             OnSettingsClicked = null;
             OnPopupClosed = null;
+            OnBlurToggled = null;
             OnLevelCompletedTriggered = null;
             OnLevelCompletedClosed = null;
         }

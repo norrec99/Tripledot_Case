@@ -197,6 +197,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TripledotCase.Core.AppSettings
   _targetFrameRate: 60
+--- !u!114 &246909997 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8606615090019216458, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
+  m_PrefabInstance: {fileID: 3055819329868611131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +314,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 13.89
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -561,6 +572,14 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1545045173850565428, guid: 36c6318a55668df408cb440d42064c31, type: 3}
+      propertyPath: _downscalePasses
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545045173850565428, guid: 36c6318a55668df408cb440d42064c31, type: 3}
+      propertyPath: _backgroundSource
+      value: 
+      objectReference: {fileID: 246909997}
     - target: {fileID: 5204566494715225125, guid: 36c6318a55668df408cb440d42064c31, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -722,6 +741,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1460417041794495534, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1724783893436844188, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -877,6 +900,10 @@ PrefabInstance:
     - target: {fileID: 6374428479010092078, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
       propertyPath: m_Name
       value: MainCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374428479010092078, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7809800152921864283, guid: c2f1dbaa2fe4d6747980b66574098f4a, type: 3}
       propertyPath: m_SizeDelta.x
