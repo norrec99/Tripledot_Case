@@ -168,7 +168,7 @@ namespace TripledotCase.UI.HomeScreen.BottomBar
 
         private void HandleNavClick()
         {
-            Taptic.Light();
+            Taptic.Medium();
             OnButtonClicked?.Invoke(this);
         }
 

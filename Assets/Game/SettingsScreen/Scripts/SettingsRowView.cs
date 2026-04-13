@@ -114,7 +114,7 @@ namespace TripledotCase.UI.Popup
 
             if (animate)
             {
-                Taptic.Light();
+                Taptic.Medium();
                 OnSwitchToggled?.Invoke(isOn);
             }
         }
